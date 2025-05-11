@@ -7,6 +7,7 @@ export const getNews = async ({
   page_number = 1,
   page_size = 10,
   category,
+  keywords,
 }) => {
   try {
     const response = await axios.get(`${BASE_URL}search.json`, {
@@ -15,6 +16,7 @@ export const getNews = async ({
         page_number: page_number,
         page_size: page_size,
         category,
+        keywords,
       },
     });
 
@@ -23,6 +25,14 @@ export const getNews = async ({
     response.data.news = response.data.news.filter(
       (n) => !category || n.category.indexOf(category) !== -1
     );
+
+    if (keywords) {
+      response.data.news = response.data.news.filter(
+        (n) =>
+          n.title.indexOf(keywords) !== -1 ||
+          n.description.indexOf(keywords) !== -1
+      );
+    }
 
     response.data.news = response.data.news.slice(
       pageNavigation,
