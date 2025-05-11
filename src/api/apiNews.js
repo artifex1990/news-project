@@ -23,6 +23,29 @@ export const getNews = async (page_number = 1, page_size = 10) => {
 
     return response.data;
   } catch (error) {
+    throw Error("Error fetching news: " + error);
+  }
+};
+
+export const getCategories = async (page_number = 1, page_size = 10) => {
+  try {
+    const response = await axios.get(`${BASE_URL}available-categories.json`, {
+      params: {
+        apiKey: API_KEY,
+        page_number: page_number,
+        page_size: page_size,
+      },
+    });
+
+    const pageNavigation = page_number * page_size - 10;
+    response.data.news = response.data.news.slice(
+      pageNavigation,
+      pageNavigation + page_size
+    );
+    response.data.page = page_number;
+
+    return response.data;
+  } catch (error) {
     return data;
   }
 };
