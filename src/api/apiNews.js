@@ -1,6 +1,5 @@
-import { getLocalCategories } from "../helpers/local/getLocalCategories";
-import { getLocalNews } from "../helpers/local/getLocalNews";
 import { getContent } from "./getContent";
+import { getLocalCategories, getLocalNews } from './local/apiLocalNews';
 
 const BASE_URL = import.meta.env.VITE_NEWS_BASE_API_URL;
 const API_KEY = import.meta.env.VITE_NEWS_API_KEY;
@@ -21,7 +20,7 @@ export const getNews = async ({
     });
   } catch (error) {
     console.log(error);
-    return await getLocalNews(page_number, page_size, category, keywords);
+    return await getLocalNews({ page_number, page_size, category, keywords });
   }
 };
 
