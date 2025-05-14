@@ -1,8 +1,6 @@
+import { API_KEY, BASE_URL } from "../constants/constants";
 import { getContent } from "./getContent";
-import { getLocalCategories, getLocalNews } from './local/apiLocalNews';
-
-const BASE_URL = import.meta.env.VITE_NEWS_BASE_API_URL;
-const API_KEY = import.meta.env.VITE_NEWS_API_KEY;
+import { getLocalCategories, getLocalNews } from "./local/apiLocalNews";
 
 export const getNews = async ({
   page_number = 1,
