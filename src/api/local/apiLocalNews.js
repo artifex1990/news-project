@@ -1,6 +1,5 @@
+import { BASE_URL_LOCAL } from "../../constants/constants";
 import { getContent } from "../getContent";
-
-const BASE_URL = import.meta.env.VITE_NEWS_BASE_API_LOCAL_URL;
 
 export const getLocalNews = async ({
   page_number = 1,
@@ -9,7 +8,7 @@ export const getLocalNews = async ({
   keywords,
 }) => {
   try {
-    const data = await getContent(`${BASE_URL}data/search.json`);
+    const data = await getContent(`${BASE_URL_LOCAL}data/search.json`);
 
     const pageNavigation = page_number * page_size - 10;
 
@@ -36,7 +35,7 @@ export const getLocalNews = async ({
 
 export const getLocalCategories = async () => {
   try {
-    const response = await getContent(`${BASE_URL}data/search.json`);
+    const response = await getContent(`${BASE_URL_LOCAL}data/search.json`);
 
     return response.data;
   } catch (error) {
